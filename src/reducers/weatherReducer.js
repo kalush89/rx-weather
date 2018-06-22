@@ -1,7 +1,7 @@
 import * as Actions from '../actions';
 
 const initialState = {
- weatherData: [],
+ weatherData: {},
  //data: [],
   isFetching: true, // Default to fetching..
   error: null

@@ -1,4 +1,4 @@
-import React, { Component}  from 'react';
+import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -26,32 +26,32 @@ class Weather extends Component {
     //this.props.dispatch(fetchForecast(params));
   }
 
+ 
   render() {
 
-    console.log("this props", this.props.location);
+    console.log("this props", this.props);
     const { isFetching, weather } = this.props;
-    
-//console.log('view this',Object.keys(weather.weatherData));
+    //console.log('view this',Object.keys(weather.weatherData));
     if (weather.err) {
-       return (
+      return (
         <p>Failed to get data: {weather.err}</p>
       );
     }
 
- 
-    if (!weather.weatherData || isFetching) {
+
+    if (!weather.weatherData.weather || isFetching) {
       return (
         <Loading />
       );
     }
- 
+
     return (
 
       <div className="Weather">
         <TheCity city={weather.weatherData.name} />
         <WeatherIconDisplay iconDys={weather.weatherData.weather[0].id} />
         <Temp temperature={weather.weatherData.main.temp} />
-        
+
       </div>
     );
   }
@@ -59,7 +59,7 @@ class Weather extends Component {
 
 const mapStateToProps = (state) => {
   const { location, weather } = state;
-console.log(state);
+  console.log("the weather data", state);
   return {
     location,
     weather
