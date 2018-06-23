@@ -6,7 +6,7 @@ export const GET_FAILURE_WEATHER = 'GET_FAILURE_WEATHER';
 
 
 //source constants
-const SOURCE_URL = 'http://api.openweathermap.org/data/2.5';
+const SOURCE_URL = 'https://api.openweathermap.org/data/2.5';
 const API_KEY = '05a98cc115bcaa26eff6631d4ed1b98c';
 
 // Action creators return a consistent "command" object.
