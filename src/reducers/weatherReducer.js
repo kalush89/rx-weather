@@ -1,7 +1,7 @@
 import * as Actions from '../actions';
 
 const initialState = {
- weatherData: {},
+ 
  //data: [],
   isFetching: true, // Default to fetching..
   error: null
@@ -18,7 +18,7 @@ export default function weather(state = initialState, action) {
     case Actions.GET_SUCCESS_WEATHER:
      return {
          ...state,
-        weatherData: action.payload,
+        weatherData: action.payload.dataset,
         isFetching: false
       };
     case Actions.GET_FAILURE_WEATHER:

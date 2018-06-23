@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import { fetchWeatherData } from '../../actions';
 import TheCity from '../location';
-import WeatherIconDisplay from '../weatherIcon';
-import Conditions from '../conditions';
+import WeatherIcon from 'react-icons-weather';
+//import Conditions from '../conditions';
 import Temp from '../temperature';
 import Loading from '../loading/loading';
 
@@ -13,7 +12,8 @@ import Loading from '../loading/loading';
 class Weather extends Component {
 
   componentWillUpdate(nextProps, nextState) {
-    if (this.props.location !== nextProps.location) {
+  
+   if (this.props.location !== nextProps.location) {
       const { latitude, longitude } = nextProps.location.data;
       // Update weather with new coordinates
       this.updateWeather(`lat=${latitude}&lon=${longitude}`);
@@ -24,12 +24,14 @@ class Weather extends Component {
     // Fetch weather data from API
     this.props.dispatch(fetchWeatherData(place));
     //this.props.dispatch(fetchForecast(params));
+
   }
 
  
   render() {
 
-    console.log("this props", this.props);
+
+   
     const { isFetching, weather } = this.props;
     //console.log('view this',Object.keys(weather.weatherData));
     if (weather.err) {
@@ -39,7 +41,7 @@ class Weather extends Component {
     }
 
 
-    if (!weather.weatherData.weather || isFetching) {
+    if (!weather.weatherData || isFetching) {
       return (
         <Loading />
       );
@@ -49,7 +51,7 @@ class Weather extends Component {
 
       <div className="Weather">
         <TheCity city={weather.weatherData.name} />
-        <WeatherIconDisplay iconDys={weather.weatherData.weather[0].id} />
+        <WeatherIcon name='owm'  iconId={weather.weatherData.weather[0].id} className='icon' fixedWidth={true} />
         <Temp temperature={weather.weatherData.main.temp} />
 
       </div>
@@ -59,12 +61,12 @@ class Weather extends Component {
 
 const mapStateToProps = (state) => {
   const { location, weather } = state;
-  console.log("the weather data", state);
+  
   return {
     location,
     weather
   };
 };
 
-Weather = connect(mapStateToProps, { fetchWeatherData })(Weather);
+Weather = connect(mapStateToProps)(Weather);
 export default Weather;

@@ -7,7 +7,7 @@ export const GET_FAILURE_WEATHER = 'GET_FAILURE_WEATHER';
 
 //source constants
 const SOURCE_URL = 'http://api.openweathermap.org/data/2.5';
-const ID = '096c23b300607891a814fb3f6fa12325';
+const API_KEY = '05a98cc115bcaa26eff6631d4ed1b98c';
 
 // Action creators return a consistent "command" object.
 export const getRequestWeather = () => ({
@@ -16,7 +16,9 @@ export const getRequestWeather = () => ({
 export const getSuccessWeather = (dataset) => {
   return {
     type: GET_SUCCESS_WEATHER,
-    payload: dataset 
+    payload: { 
+      dataset
+    }
   };
 };
 export const getFailureWeather = err => ({
@@ -26,7 +28,7 @@ export const getFailureWeather = err => ({
 
 export const fetchWeatherData = place => dispatch => {
 	dispatch(getRequestWeather())
-  return fetch(`http://api.openweathermap.org/data/2.5/weather?id=2331140&APPID=05a98cc115bcaa26eff6631d4ed1b98c`)
+  return fetch(`${SOURCE_URL}/weather?${place}&APPID=${API_KEY}&units=metric`)
     .then((response) => {
       
       
@@ -41,7 +43,7 @@ export const fetchWeatherData = place => dispatch => {
    
 };
 
-/*
+
 export const GET_REQUEST_LOCATION = 'GET_REQUEST_LOCATION';
 export const GET_SUCCESS_LOCATION = 'GET_SUCCESS_LOCATION';
 
@@ -51,9 +53,10 @@ export const getRequestLocation = () => ({
 
 export const getSuccessLocation= (location) => {
   return {
-    type: GET_SUCCESS_WEATHER,
-    payload: location
-    
+    type: GET_SUCCESS_LOCATION,
+    payload: {
+      location
+    }
   };
 };
 
@@ -69,7 +72,7 @@ export function fetchUserLocation() {
 
     function success(position){
       const { latitude, longitude } = position.coords;
-      dispatch(getSuccessLocation({ latitude, longitude }));
+      dispatch(getSuccessLocation({ latitude, longitude}));
     }
 
     function error(error){
@@ -77,4 +80,3 @@ export function fetchUserLocation() {
     }
   } 
 }
-*/

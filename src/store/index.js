@@ -16,7 +16,5 @@ export default function configureStore(initialState) {
   	applyMiddleware(...middleware)
 	);
 
-	
-
 	return store;
 }
